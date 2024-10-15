@@ -1,5 +1,7 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="hello">
+    <nav v-for="nav in navbar" :key="nav.id" @click="goTo(nav.id)">{{ nav.name }}</nav>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -32,9 +34,41 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'Home',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      navbar: [
+        {id: 1, name: 'Home'},
+        {id: 2, name: 'About'},
+        {id: 3, name: 'Contact'}
+      ]
+    }
+  },
+methods: {
+    goTo (id) {
+      console.log(id)
+      switch (id) {
+        case 1:
+          this.$router.replace({
+            name: 'home',
+          })
+          break
+        case 2:
+          this.$router.replace({
+            name: 'about',
+          })
+          break
+        case 3:
+          this.$router.replace({
+            name: 'contact',
+          })
+          break
+      }
+    }
   }
 }
 </script>
